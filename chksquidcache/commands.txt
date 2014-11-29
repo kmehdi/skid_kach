@@ -1,0 +1,80 @@
+Source:aacable.wordpress.com
+Credits:Syed Jahanzaib
+
+1:Create file
+touch /etc/fw.sh
+
+2:Change permissions
+chmod +x /etc/fw.sh
+
+3:Edit File
+nano /etc/fw.sh
+
+(Add the script simple internet sharing)
+
+4:Run
+/etc/fw.sh
+
+5:Place shortcut
+/etc/rc.local
+
+6:Upgrade DNS
+apt-get install dnsmasq
+
+7:Update system
+apt-get update
+
+8:Install Squid
+apt-get install squid
+
+9:Edit squid.conf
+nano /etc/squid/squid.conf
+
+(Add the script squid.conf)
+
+10:Install Nginx
+apt-get install nginx
+
+11:Edit Nginx.conf
+nano /etc/nginx/nginx.conf
+
+(Add the script Nginx.conf)
+
+12:Create directories to hold cache files
+mkdir /usr/local/www
+mkdir -p /usr/local/www/nginx_cache
+mkdir -p /usr/local/www/nginx_cache/tmp
+mkdir -p /usr/local/www/nginx_cache/files
+chown www-data /usr/local/www/nginx_cache/files/ -Rf
+
+13:create nginx.rb file
+touch /etc/nginx/nginx.rb
+chmod 755 /etc/nginx/nginx.rb
+
+14:edit Nginx.rb
+nano /etc/nginx/nginx.rb
+
+(Add script Nginx.rb)
+
+15:Install Ruby
+apt-get install ruby
+
+16:create cache dir
+mkdir /cache1
+chown proxy:proxy /cache1
+chmod -R  777 /cache1
+
+17:Start dir
+squid -z
+
+18:Start squid
+service squid start
+
+19:Restart Nginx
+service nginx restart
+
+20:Chek cached videos
+ls -lh /usr/local/www/nginx_cache/files
+
+21:chek cache hit
+tail -f /var/log/squid/access.log | grep HIT
